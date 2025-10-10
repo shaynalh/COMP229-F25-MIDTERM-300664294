@@ -1,37 +1,29 @@
 /**
- * Midterm API Project - COMP229 Summer 2025
- * 
- * Challenge: Implement the API logic for managing a collection of movies!
- * 
- * Here's the deal:
- * You have a server running on port 3000, and an array of movie objects.
- * Your mission, should you choose to accept it, is to implement the missing logic
- * for each of the following API endpoints. 
- * 
+ * Midterm API Project - COMP229
+ *
+ * Challenge: Implement the API logic for managing a collection of video games!
+ *
+ * Here's the setup:
+ * A server is already running on port 3000 with an array of game objects.
+ * Your mission is to implement the missing logic for each of the endpoints below.
+ *
  * Endpoints:
- * 1. GET /api/movies       - Retrieve the full list of movies.
- * 2. GET /api/movies/filter?genre=[genre name] - Retrieve movies by genre match.
- * 3. GET /api/movies/:id   - Retrieve a movie by its index.
- * 4. POST /api/movies      - Add a new movie to the collection.
- * 5. PUT /api/movies/:id   - Update a movie by its index.
- * 6. DELETE /api/movies/:id - Remove a movie from the collection by its index.
- * 
- * The array of movies is already defined for you, but you need to bring the logic
+ * 1. GET /api/games       - Retrieve the full list of games.
+ * 2. GET /api/games/filter?genre=[genre name] - Retrieve games by genre match.
+ * 3. GET /api/games/:id   - Retrieve a game by its index.
+ * 4. POST /api/games      - Add a new game to the library.
+ * 5. PUT /api/games/:id   - Update a game by its index.
+ * 6. DELETE /api/games/:id - Remove a game from the library by its index.
+ *
+ * The array of games is already defined for you, but you need to bring the logic
  * to life. Test your work using tools like Postman, Thunder Client, or Insomnia.
- * 
+ *
  * Submission Requirements:
- * 1. **Screenshots**: Provide screenshots of your API tests, clearly showing:
- *    - There should be 1 screenshot per Endpoint (6 in total)
- *    - The API request URL and method.
- *    - The request body (where applicable).
- *    - The successful response with proper HTTP status codes.
- *    Use Postman, Thunder Client, Insomnia, or another similar API testing tool.
- * 
- * 2. **Code Submission**: 
- *    - Include your code in a **.zip** file.
- *    - Provide a GitHub link to your repository containing the project.
- *    - Make sure all screenshots are clearly visible in your submission.
- * 
+ * 1. Screenshots: Provide one per endpoint, showing the request details and a
+ *    successful response with the correct status code.
+ * 2. Code Submission: Zip your project, share the repo link, and ensure your
+ *    personalized games are present.
+ *
  * Good luck, and may your code be bug-free!
  */
 
@@ -43,13 +35,13 @@ app.use(express.json());
 // Serve static files (e.g., images, CSS) from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Array of movie objects
-let movies = [
-  { title: 'The Matrix', genre: 'Sci-Fi', year: 1999, director: 'The Wachowskis' },
-  { title: 'Inception', genre: 'Sci-Fi', year: 2010, director: 'Christopher Nolan' },
-  { title: 'The Godfather', genre: 'Drama', year: 1972, director: 'Francis Ford Coppola' },
-  { title: 'Pulp Fiction', genre: 'Crime', year: 1994, director: 'Quentin Tarantino' },
-  { title: 'The Dark Knight', genre: 'Action', year: 2008, director: 'Christopher Nolan' }
+// Array of game objects
+let games = [
+  { title: 'The Legend of Zelda: Breath of the Wild', genre: 'Adventure', platform: 'Nintendo Switch', year: 2017, developer: 'Nintendo' },
+  { title: 'God of War', genre: 'Action', platform: 'PlayStation 4', year: 2018, developer: 'Santa Monica Studio' },
+  { title: 'Hollow Knight', genre: 'Metroidvania', platform: 'PC', year: 2017, developer: 'Team Cherry' },
+  { title: 'Forza Horizon 5', genre: 'Racing', platform: 'Xbox Series X|S', year: 2021, developer: 'Playground Games' },
+  { title: 'Stardew Valley', genre: 'Simulation', platform: 'Nintendo Switch', year: 2016, developer: 'ConcernedApe' }
 ];
 
 // Set the port for the server
@@ -62,11 +54,11 @@ app.get('/', (req, res) => {
 
 // API Endpoints
 
-// GET /api/movies
-// Description: Get all movies
-// Task: Implement logic to return the full list of movies
-app.get('/api/movies', (req, res) => {
-  // TODO: Add logic to return all movies
+// GET /api/games
+// Description: Get all games
+// Task: Implement logic to return the full list of games
+app.get('/api/games', (req, res) => {
+  // TODO: Add logic to return all games
 
   // ***************************************************************
   // ***************************************************************
@@ -78,11 +70,11 @@ app.get('/api/movies', (req, res) => {
   res.status(501).send('Not Implemented');
 });
 
-// GET /api/movies/filter?genre=[genre name]
-// Description: Filter movies by genre
-// Task: Implement logic to return movies matching the specified genre
-app.get('/api/movies/filter', (req, res) => {
-  // TODO: Add logic to filter movies by genre
+// GET /api/games/filter?genre=[genre name]
+// Description: Filter games by genre
+// Task: Implement logic to return games matching the specified genre
+app.get('/api/games/filter', (req, res) => {
+  // TODO: Add logic to filter games by genre
   
   // ***************************************************************
   // ***************************************************************
@@ -94,11 +86,11 @@ app.get('/api/movies/filter', (req, res) => {
   res.status(501).send('Not Implemented');
 });
 
-// GET /api/movies/:id
-// Description: Get a specific movie by ID
-// Task: Implement logic to return a movie by its index (ID)
-app.get('/api/movies/:id', (req, res) => {
-  // TODO: Add logic to return a movie by its index (ID)
+// GET /api/games/:id
+// Description: Get a specific game by ID
+// Task: Implement logic to return a game by its index (ID)
+app.get('/api/games/:id', (req, res) => {
+  // TODO: Add logic to return a game by its index (ID)
   
   // ***************************************************************
   // ***************************************************************
@@ -110,11 +102,11 @@ app.get('/api/movies/:id', (req, res) => {
   res.status(501).send('Not Implemented');
 });
 
-// POST /api/movies
-// Description: Add a new movie
-// Task: Implement logic to add a new movie to the array
-app.post('/api/movies', (req, res) => {
-  // TODO: Add logic to add a new movie to the array
+// POST /api/games
+// Description: Add a new game
+// Task: Implement logic to add a new game to the array
+app.post('/api/games', (req, res) => {
+  // TODO: Add logic to add a new game to the array
   
   // ***************************************************************
   // ***************************************************************
@@ -126,11 +118,11 @@ app.post('/api/movies', (req, res) => {
   res.status(501).send('Not Implemented');
 });
 
-// PUT /api/movies/:id
-// Description: Update a movie by ID
-// Task: Implement logic to update a movie by its index (ID)
-app.put('/api/movies/:id', (req, res) => {
-  // TODO: Add logic to update a movie by its index
+// PUT /api/games/:id
+// Description: Update a game by ID
+// Task: Implement logic to update a game by its index (ID)
+app.put('/api/games/:id', (req, res) => {
+  // TODO: Add logic to update a game by its index
   
   // ***************************************************************
   // ***************************************************************
@@ -142,11 +134,11 @@ app.put('/api/movies/:id', (req, res) => {
   res.status(501).send('Not Implemented');
 });
 
-// DELETE /api/movies/:id
-// Description: Remove a movie by ID
-// Task: Implement logic to remove a movie by its index (ID)
-app.delete('/api/movies/:id', (req, res) => {
-  // TODO: Add logic to remove a movie by its index
+// DELETE /api/games/:id
+// Description: Remove a game by ID
+// Task: Implement logic to remove a game by its index (ID)
+app.delete('/api/games/:id', (req, res) => {
+  // TODO: Add logic to remove a game by its index
   
   // ***************************************************************
   // ***************************************************************
