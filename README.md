@@ -14,7 +14,7 @@ Your task for the COMP229 midterm is to wire up a RESTful API that manages a col
 The starter data lives in `server.js`, but **you must complete the logic** for every endpoint above.
 
 ### Array Example
-Below is an example of the object structure you will manipulate (the one below refers to books not games, but you got the idea):
+Below is an example of the object structure you will manipulate (the one below refers to books not games, but you got the idea **create your own**):
 
 ![Array Example](public/images/array-example.jpg)
 
