@@ -41,7 +41,9 @@ let games = [
   { title: 'God of War', genre: 'Action', platform: 'PlayStation 4', year: 2018, developer: 'Santa Monica Studio' },
   { title: 'Hollow Knight', genre: 'Metroidvania', platform: 'PC', year: 2017, developer: 'Team Cherry' },
   { title: 'Forza Horizon 5', genre: 'Racing', platform: 'Xbox Series X|S', year: 2021, developer: 'Playground Games' },
-  { title: 'Stardew Valley', genre: 'Simulation', platform: 'Nintendo Switch', year: 2016, developer: 'ConcernedApe' }
+  { title: 'Stardew Valley', genre: 'Simulation', platform: 'Nintendo Switch', year: 2016, developer: 'ConcernedApe' },
+  { title: 'Animal Crossing: New Leaf', genre: 'Simulation', platform: 'Nintendo 3DS', year: 2013, developer: 'Nintendo' },
+  { title: 'Barbie Dreamhouse Party', genre: 'Party', platform: 'Wii U', year: 2013, developer: 'WayForward' },
 ];
 
 // Set the port for the server
@@ -59,15 +61,7 @@ app.get('/', (req, res) => {
 // Task: Implement logic to return the full list of games
 app.get('/api/games', (req, res) => {
   // TODO: Add logic to return all games
-
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  return res.status(200).json(games);
 });
 
 // GET /api/games/filter?genre=[genre name]
@@ -76,14 +70,14 @@ app.get('/api/games', (req, res) => {
 app.get('/api/games/filter', (req, res) => {
   // TODO: Add logic to filter games by genre
   
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  const genre = (req.query.genre || '').toString().trim().toLowerCase();
+  if (!genre) {
+    return res.status(400).json({ error: 'Genre query parameter is required' });
+  }
+  const matches = games.filter(
+    g => (g.genre || '').toString().trim().toLowerCase() === genre
+  );
+  return res.status(200).json(matches);
 });
 
 // GET /api/games/:id
@@ -92,14 +86,11 @@ app.get('/api/games/filter', (req, res) => {
 app.get('/api/games/:id', (req, res) => {
   // TODO: Add logic to return a game by its index (ID)
   
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id < 0 || id >= games.length) {
+    return res.status(404).json({ error: 'Game not found' });
+  }
+  return res.status(200).json(games[id]);
 });
 
 // POST /api/games
@@ -108,14 +99,13 @@ app.get('/api/games/:id', (req, res) => {
 app.post('/api/games', (req, res) => {
   // TODO: Add logic to add a new game to the array
   
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  const { title, genre, platform, year, developer } = req.body || {};
+  if (!title || !genre || !platform || !year || !developer) {
+    return res.status(400).json({ error: 'All game fields are required' });
+  }
+  const newGame = { title, genre, platform, year, developer };
+  games.push(newGame);
+  return res.status(201).json(newGame); 
 });
 
 // PUT /api/games/:id
@@ -124,14 +114,13 @@ app.post('/api/games', (req, res) => {
 app.put('/api/games/:id', (req, res) => {
   // TODO: Add logic to update a game by its index
   
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id < 0 || id >= games.length) {
+    return res.status(404).json({ error: 'Game not found' });
+  }
+  // merge
+  games[id] = { ...games[id], ...req.body };
+  return res.status(200).json(games[id]);
 });
 
 // DELETE /api/games/:id
@@ -140,14 +129,12 @@ app.put('/api/games/:id', (req, res) => {
 app.delete('/api/games/:id', (req, res) => {
   // TODO: Add logic to remove a game by its index
   
-  // ***************************************************************
-  // ***************************************************************
-  // ***************  Implement your code here  ********************
-  // ***************************************************************
-  // ***************************************************************
-
-  // Don't forget to remove the line below:
-  res.status(501).send('Not Implemented');
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id < 0 || id >= games.length) {
+    return res.status(404).json({ error: 'Game not found' });
+  }
+  const removed = games.splice(id, 1)[0];
+  return res.status(200).json(removed);
 });
 
 // Start the server

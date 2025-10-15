@@ -1,0 +1,7 @@
+For the midterm assignment, I validated each endpoint using Thunder Client. I added two games released between 
+2010-2019 corresponding to my student ID, Animal Crossing: New Leaf, and Barbie Dreamhouse Party. I validated the
+GET endpoints ensuring they returned the correct data and status codes. For POST, I added a new game ('Just Dance'), 
+and verified that it was added to the list. I validated the PUT endpoint by updating the platform information from 
+Playstation to PC and checking for proper 200 response. I validated DELETE by removing the first game, 'Legend of 
+Zelda: Breath of the Wild' and checking for proper 201 response. Each endpoint was tested for success and validity 
+as evidenced by the screenshots.
